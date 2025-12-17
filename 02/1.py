@@ -10,13 +10,24 @@ filename = sys.argv[1]
 
 ranges =  [[int(i) for i in r.split("-")] for r in open(filename, 'r').readlines()[0].split(",")]
 
-c = 0
+c1 = 0
+c2 = 0
 for r in ranges:
     for i in range(r[0], r[1] + 1):
         s = str(i)
         mid = len(s) // 2
         if s[:mid] == s[mid:]:
             #print(i)
-            c += i
+            c1 += i
+        for l in range(1, mid + 1):
+            if s == (s[:l] * (len(s) // l)):
+                print(s)
+                c2 += i
+                break
+
 print("Part 1: ")
-print(c)    
+print(c1)    
+
+print("Part 2: ")
+print(c2)
+

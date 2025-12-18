@@ -24,6 +24,18 @@ print("Part 1:")
 print(c)
 
 # part 2
-
-
-
+whnew = warehouse.copy()
+c = 0
+while True:
+    warehouse = whnew.copy()
+    for y in range(1, len(warehouse) - 1):
+        for x in range(1, len(warehouse[0]) - 1):
+            if warehouse[x, y] == "@":
+                i = warehouse[x - 1: x + 2, y - 1: y + 2]
+                if (i == "@").sum() < 5:
+                    c += 1
+                    whnew[x, y] = "."
+    if np.array_equal(whnew, warehouse):
+        break
+print("Part 2:")
+print(c)

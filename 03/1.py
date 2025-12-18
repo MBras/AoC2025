@@ -29,3 +29,29 @@ for bank in banks:
 
 print("Part 1:")
 print(c1)
+
+
+c2 = 0
+for bank in banks:
+    joltage = 0
+    nb = 12
+    p = 0 
+
+    # get max in the first x digits
+    for _ in range(nb):
+        if nb == 1:
+            #print(bank[p:])
+            pos, val = max(enumerate(bank[p:]), key=lambda x: x[1])
+        else:
+            #print(bank[p:-nb + 1])
+            pos, val = max(enumerate(bank[p:-nb + 1]), key=lambda x: x[1])
+        #print(pos)
+        nb -= 1
+        p += pos + 1
+        joltage = joltage * 10 + val
+    #print(joltage)
+    c2 += joltage
+
+print("Part 2:")
+print(c2)
+print(banks[0][3:0])   

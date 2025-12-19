@@ -25,3 +25,34 @@ for y in range(len(tree)):
                 c += 1
 print(tree)
 print(c)
+
+# recursive now
+# start from  S
+height, width = tree.shape
+print(tree.shape)
+
+rectree = np.zeros(tree.shape)
+print(rectree)
+
+s = np.argwhere(tree == "S")[0]
+
+def splitter(start):
+    if rectree[start[0], start[1]] != 0:
+        return rectree[start[0], start[1]]
+    # if the bottom is reached, done
+    elif start[0] + 1 == len(tree):
+        rectree[start[0], start[1]] = 1
+        return 1
+    # if a "^" is encountered, split the beam
+    elif tree[start[0] + 1, start[1]] == "^":
+        value = splitter([start[0] + 1, start[1] - 1]) + splitter([start[0] + 1, start[1] + 1])
+        rectree[start[0], start[1]] = value
+        return value
+    else:
+        value = splitter([start[0] + 1, start[1]])
+        rectree[start[0], start[1]] = value
+        return value
+
+print("Part 2:")
+print(splitter(s))
+print(rectree)
